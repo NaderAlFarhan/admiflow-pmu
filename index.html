@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AdmiFlow – PMU</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>AdmiFlow – منصة القبول التفاعلية</h1>
+    <form id="admissionForm">
+      <label>الاسم الكامل</label>
+      <input type="text" id="fullName" required />
+      <label>البريد الإلكتروني</label>
+      <input type="email" id="email" required />
+      <label>الجنسية</label>
+      <select id="nationality" required>
+        <option value="">اختر</option>
+        <option value="Saudi">سعودي</option>
+        <option value="Non-Saudi">غير سعودي</option>
+      </select>
+      <label>المعدل التراكمي في الثانوية %</label>
+      <input type="number" id="gpa" max="100" min="0" required />
+      <label>درجة القدرات</label>
+      <input type="number" id="qiyas" max="100" min="0" required />
+      <label>درجة التحصيلي</label>
+      <input type="number" id="tahsili" max="100" min="0" required />
+      <label>نتيجة اللغة (IELTS)</label>
+      <input type="number" step="0.5" id="ielts" max="9" min="0" required />
+      <button type="submit">تحقق من الأهلية</button>
+    </form>
+    <div id="result"></div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
