@@ -1,2 +1,1 @@
-# admiflow-pmu
-AdmiFlow PMU – منصة القبول التفاعلية بجامعة الأمير محمد بن فهد
+// Placeholder content for documentation/README.md
