@@ -1,27 +1,24 @@
-// server.js – AdmiFlow PMU Backend Server
-
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// 🧠 لتحليل JSON من الطلبات
+require('dotenv').config();
 app.use(express.json());
 
-// ✅ استدعاء ملفات التكامل
-require('dotenv').config();
-
-// ✅ استدعاء واجهات التقديم وتتبع الطلب
+// ✅ استدعاء الملفات
 const applicationRoutes = require('./routes/application');
+const adminRoutes = require('./routes/admin');
+
+// ✅ ربط المسارات
 app.use('/', applicationRoutes);
+app.use('/', adminRoutes);
 
 // ✅ نقطة فحص رئيسية
 app.get('/', (req, res) => {
-  res.send('AdmiFlow – PMU API is live 🎓');
+  res.send('🚀 AdmiFlow – PMU API is Live!');
 });
 
 // ✅ تشغيل السيرفر
 app.listen(PORT, () => {
   console.log(`🚀 Server is running on http://localhost:${PORT}`);
 });
-const adminRoutes = require('./routes/admin');
-app.use('/', adminRoutes);
