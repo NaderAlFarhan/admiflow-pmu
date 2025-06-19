@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: admiflow-pmu
+    env: node
+    region: oregon
+    plan: free
+    branch: main
+    buildCommand: npm install
+    startCommand: node server.js
+    autoDeploy: true
+    healthCheckPath: /
+    envVars:
+      - key: PORT
+        value: 3000
