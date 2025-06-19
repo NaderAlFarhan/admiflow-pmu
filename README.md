@@ -1,19 +1,50 @@
-# AdmiFlow – PMU | Intelligent Admission Console
+# 🚀 AdmiFlow – PMU
 
-نظام قبول ذكي وتفاعلي لجامعة الأمير محمد بن فهد (PMU)، يهدف إلى تحسين تجربة التقديم للطلاب وتسهيل إدارة البيانات الأكاديمية باستخدام تقنيات متقدمة.
+Smart Admissions System for Prince Mohammad Bin Fahd University (PMU).  
+A bilingual web-based platform for managing student applications with real-time tracking, API integration, and admin dashboard.
 
-## 🚀 الوظائف الرئيسية
-- التحقق الفوري من الأهلية (قدرات، تحصيلي، نسبة ثانوية)
-- عرض التخصصات المتاحة حسب البيانات
-- إرسال رسائل إشعار عبر البريد والـ SMS
-- إدارة تكاملات API (Banner، SendGrid، Twilio)
+---
 
-## 🛠️ التقنيات المستخدمة
-- HTML5 / CSS3 / JS
-- Node.js + Express
-- PostgreSQL
-- GitHub Actions
-- Replit / Vercel / Render for deployment
+## 🌐 Live Deployment
 
-## 📦 هيكل المشروع
-(مخطط الملفات)
+✅ Access the live system here:  
+🔗 [https://admiflow-pmu.onrender.com](https://admiflow-pmu.onrender.com)
+
+---
+
+## 📦 Features
+
+- 📝 Student application form (frontend)
+- 📡 Real-time API endpoints (Express.js)
+- 📂 Admin dashboard to review applications
+- 🔁 Status tracking via `/track-status`
+- 🇸🇦 Dual language support (Arabic + English)
+- ☁️ Full deployment via GitHub Actions to Render
+
+---
+
+## ⚙️ Tech Stack
+
+| Layer       | Technology             |
+|-------------|-------------------------|
+| Frontend    | HTML, Vanilla JS        |
+| Backend     | Node.js, Express.js     |
+| Deployment  | GitHub Actions → Render |
+| Repository  | GitHub (Private/Public) |
+
+---
+
+## 📁 Project Structure
+
+```bash
+.
+├── public/
+│   ├── index.html
+│   ├── admin.html
+│   └── admin.js
+├── routes/
+│   ├── application.js
+│   └── admin.js
+├── server.js
+├── package.json
+└── README.md
