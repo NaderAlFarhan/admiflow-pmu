@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <title>لوحة تحكم القبول – AdmiFlow PMU</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; background: #f7f7f7; margin: 0; padding: 20px; direction: rtl; }
+    h1 { color: #2c3e50; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { padding: 10px; border: 1px solid #ccc; text-align: center; }
+    th { background: #2980b9; color: white; }
+    tr:nth-child(even) { background: #f2f2f2; }
+    button { padding: 5px 10px; cursor: pointer; }
+    .filter { margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+  <h1>📋 لوحة تحكم القبول – AdmiFlow PMU</h1>
+
+  <div class="filter">
+    <label>تصفية حسب الحالة:</label>
+    <select id="statusFilter" onchange="filterStatus()">
+      <option value="">الكل</option>
+      <option value="قيد المراجعة">قيد المراجعة</option>
+      <option value="مقبول">مقبول</option>
+      <option value="مرفوض">مرفوض</option>
+    </select>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>رقم الطلب</th>
+        <th>الاسم</th>
+        <th>الحالة</th>
+        <th>البريد</th>
+        <th>تاريخ التقديم</th>
+      </tr>
+    </thead>
+    <tbody id="applicationsTable">
+      <!-- سيتم تعبئة الطلبات هنا -->
+    </tbody>
+  </table>
+
+  <script>
+    async function fetchApplications() {
+      const res = await fetch('/admin/applications');
+      const data = await res.json();
+      window.allApps = data;
+      displayApplications(data);
+    }
+
+    function displayApplications(apps) {
+      const tbody = document.getElementById('applicationsTable');
+      tbody.innerHTML = '';
+      apps.forEach(app => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${app.id}</td>
+          <td>${app.name}</td>
+          <td>${app.status}</td>
+          <td>${app.email}</td>
+          <td>${new Date(app.submittedAt).toLocaleDateString()}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    function filterStatus() {
+      const status = document.getElementById('statusFilter').value;
+      const filtered = status ? window.allApps.filter(a => a.status === status) : window.allApps;
+      displayApplications(filtered);
+    }
+
+    fetchApplications();
+  </script>
+</body>
+</html>
