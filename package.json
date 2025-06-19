@@ -1,1 +1,14 @@
-// Placeholder content for package.json
+{
+  "name": "admiflow-pmu",
+  "version": "1.0.0",
+  "description": "AdmiFlow PMU – منصة القبول الذكية",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "uuid": "^9.0.0",
+    "dotenv": "^16.0.3"
+  }
+}
