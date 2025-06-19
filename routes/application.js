@@ -54,3 +54,7 @@ router.get('/track-status', (req, res) => {
 });
 
 module.exports = router;
+// ✅ عرض جميع الطلبات – GET /applications
+router.get('/admin/applications', (req, res) => {
+  res.json(applications); // متغير التطبيقات الموجود مسبقًا في الذاكرة
+});
