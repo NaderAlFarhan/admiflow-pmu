@@ -6,9 +6,3 @@ Smart Admissions Workflow for Prince Mohammad Bin Fahd University (PMU)
 - Application Tracking Dashboard
 - API Services
 - Notifications & Auditing
-
-## Student Interface
-A simple form in `public/index.html` submits applicant data to the `/evaluate` API and displays the decision.
-
-## Testing
-Run `npm test` to execute eligibility engine tests.

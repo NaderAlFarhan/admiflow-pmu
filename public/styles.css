@@ -1,0 +1,10 @@
+body {
+  font-family: Arial;
+  margin: 2em;
+  background: #f3f3f3;
+}
+form {
+  background: white;
+  padding: 1em;
+  border-radius: 8px;
+}
