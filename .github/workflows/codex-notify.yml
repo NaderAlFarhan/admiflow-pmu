@@ -1,0 +1,24 @@
+name: Notify Codex and SharePoint
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify Codex
+        env:
+          CODEX_WEBHOOK_URL: ${{ secrets.CODEX_WEBHOOK_URL }}
+        run: |
+          curl -X POST "$CODEX_WEBHOOK_URL" \
+            -H 'Content-Type: application/json' \
+            -d '{"repository":"${{ github.repository }}","commit":"${{ github.sha }}"}'
+      - name: Trigger Power Automate Flow
+        env:
+          POWER_AUTOMATE_WEBHOOK_URL: ${{ secrets.POWER_AUTOMATE_WEBHOOK_URL }}
+        run: |
+          curl -X POST "$POWER_AUTOMATE_WEBHOOK_URL" \
+            -H 'Content-Type: application/json' \
+            -d '{"repository":"${{ github.repository }}","commit":"${{ github.sha }}"}'

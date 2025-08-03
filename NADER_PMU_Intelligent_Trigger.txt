@@ -1,0 +1,15 @@
+🧠 NADER Supreme Execution Trigger – PMU Intelligent Projects & Codex
+
+نفّذ هذا المشروع بصيغة NADER Supreme Execution – Intelligent Final Edition، مع تفعيل Codex, GitHub Logic, SharePoint Workflow, Streamlit UI, Power Automate Integration. أرسل كل العناصر دفعة واحدة، تنسيق تنفيذي، لا تكرار، لا تجزئة، جاهز للدمج أو العرض المؤسسي.
+
+⚙️ كيفية الاستخدام المقترحة داخل Codex:
+• Trigger Type / نوع الطلب:
+NADER Supreme Execution – Intelligent Final Edition
+• Action Required / المطلوب تنفيذه:
+نفّذ هذا المشروع بصيغة NADER Supreme Execution – Intelligent Final Edition،
+مع تفعيل Codex, GitHub Logic, SharePoint Workflow, Streamlit UI, Power Automate Integration.
+أرسل كل العناصر دفعة واحدة، تنسيق تنفيذي، لا تكرار، لا تجزئة، جاهز للدمج أو العرض المؤسسي.
+• مرفقات داعمة (اختياري):
+يمكنك إرفاق الملف <NADER_PMU_Intelligent_Trigger.txt> أو نسخه كما هو دون علامات Markdown.
+
+✅ استخدم النص كما هو، وسوف يستشعر Codex تلقائيًا أنك تطلب تنفيذ المشروع بشكل كامل دون أي ترحيل أو تقطير، وفقًا لمستوى الإنتاجية المحترف.

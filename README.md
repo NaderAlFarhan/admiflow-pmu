@@ -1,50 +1,70 @@
-# 🚀 AdmiFlow – PMU
+# 📘 AdmiFlow – PMU | Smart Admissions Core System
 
-Smart Admissions System for Prince Mohammad Bin Fahd University (PMU).  
-A bilingual web-based platform for managing student applications with real-time tracking, API integration, and admin dashboard.
-
----
-
-## 🌐 Live Deployment
-
-✅ Access the live system here:  
-🔗 [https://admiflow-pmu.onrender.com](https://admiflow-pmu.onrender.com)
+AdmiFlow – PMU is a smart, bilingual admissions platform for Prince Mohammad Bin Fahd University. It combines GitHub automation, Codex triggers, SharePoint workflows, and a Streamlit interface to deliver an end‑to‑end admissions experience.
 
 ---
 
-## 📦 Features
+## 🌐 Live Preview
 
-- 📝 Student application form (frontend)
-- 📡 Real-time API endpoints (Express.js)
-- 📂 Admin dashboard to review applications
-- 🔁 Status tracking via `/track-status`
-- 🇸🇦 Dual language support (Arabic + English)
-- ☁️ Full deployment via GitHub Actions to Render
+- **GitHub Pages:** https://naderalfarhan.github.io/admiflow-pmu/
+- **Render Deployment:** https://admiflow-pmu.onrender.com
 
 ---
 
-## ⚙️ Tech Stack
+## ✨ Features
 
-| Layer       | Technology             |
-|-------------|-------------------------|
-| Frontend    | HTML, Vanilla JS        |
-| Backend     | Node.js, Express.js     |
-| Deployment  | GitHub Actions → Render |
-| Repository  | GitHub (Private/Public) |
+- 🧠 Codex integration for intelligent prompt execution
+- 📑 SharePoint workflow with Power Automate notifications
+- 🖥️ Streamlit UI for interactive admission queries
+- 🔁 GitHub Actions for automatic builds and deployments
+- 🌍 Dual language (Arabic / English) support
 
 ---
 
-## 📁 Project Structure
+## 🚀 Quick Start
+
+```bash
+# install dependencies
+pip install openai streamlit
+
+# set your OpenAI key
+export OPENAI_API_KEY="sk-..."
+
+# run the Streamlit interface
+streamlit run run_prompt.py -- --context PromptMaster_AdmiFlowPMU_v2025Q.json
+```
+
+The `PromptMaster_AdmiFlowPMU_v2025Q.json` file provides system instructions and sample interactions. The app can also be deployed via the included GitHub Pages workflow (`gh-pages.yml`).
+
+---
+
+## 📁 Repository Structure
 
 ```bash
 .
-├── public/
-│   ├── index.html
-│   ├── admin.html
-│   └── admin.js
-├── routes/
-│   ├── application.js
-│   └── admin.js
-├── server.js
-├── package.json
-└── README.md
+├── app.py                     # Streamlit web interface
+├── run_prompt.py              # CLI/Streamlit runner
+├── main.py                    # CLI prompt helper
+├── sharepoint_upload.py       # SharePoint integration helper
+├── PromptMaster_AdmiFlowPMU_v2025Q.json
+├── instructions.md            # Usage documentation
+└── .github/workflows/
+    ├── codex-notify.yml       # Notify Codex + Power Automate
+    └── gh-pages.yml           # Deploy to GitHub Pages
+```
+
+---
+
+## 🧠 Maintainer
+
+**Nader Al Farhan**  
+Administrative Assistant – Admissions Unit  
+📧 nalfarhan@pmu.edu.sa  
+🔗 [LinkedIn](https://www.linkedin.com/in/naderalfarhan)
+
+---
+
+## 📄 License
+
+[MIT License](LICENSE) – for educational and internal institutional use only.
+
