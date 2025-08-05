@@ -1,0 +1,49 @@
+{
+  "definition": {
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+    "triggers": {
+      "manual": {
+        "type": "Request",
+        "kind": "Button",
+        "inputs": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "student_id": {"type": "string"},
+              "program": {"type": "string"}
+            },
+            "required": ["student_id"]
+          }
+        }
+      }
+    },
+    "actions": {
+      "HTTP": {
+        "type": "Http",
+        "inputs": {
+          "method": "POST",
+          "uri": "https://example.com/admiflow",
+          "body": "@triggerBody()"
+        }
+      },
+      "sharepoint_notification": {
+        "type": "ApiConnection",
+        "inputs": {
+          "host": {
+            "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+            "connectionName": "sharepointonline",
+            "operationId": "PostItem"
+          },
+          "parameters": {
+            "dataset": "https://contoso.sharepoint.com/sites/Admissions",
+            "table": "Announcements",
+            "item": {
+              "Title": "AdmiFlow update",
+              "Commit": "@{triggerBody()['commit']}"
+            }
+          }
+        }
+      }
+    }
+  }
+}
