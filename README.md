@@ -43,6 +43,8 @@ The `PromptMaster_AdmiFlowPMU_v2025Q.json` file provides system instructions and
 ```bash
 .
 ├── app.py                     # Streamlit web interface
+├── EligibilityCalculator.json  # Admission criteria rules
+├── EligibilityEngine.py        # Python eligibility evaluator
 ├── run_prompt.py              # CLI/Streamlit runner
 ├── main.py                    # CLI prompt helper
 ├── sharepoint_upload.py       # SharePoint integration helper
