@@ -1,49 +1,91 @@
-"""Eligibility evaluation for AdmiFlow-PMU.
-تقييم الأهلية لنظام AdmiFlow-PMU"""
+"""Program-based eligibility evaluation.
 
-from typing import Dict, List
+This module loads admission rules from a JSON file and evaluates whether an
+applicant qualifies for a requested program.  If the applicant does not meet
+the minimum requirements, a list of missing criteria and suggested alternative
+programs is returned.
 
-# Eligibility rules definition (English + Arabic)
-# تعريف قواعد الأهلية
-CRITERIA = [
-    ("High School Score ≥ 85%", "high_school_score", 85),
-    ("Qudurat Score ≥ 65", "qudrat_score", 65),
-    ("Tahseely Score ≥ 65", "tahseely_score", 65),
-    ("IELTS Overall ≥ 6.0", "ielts_overall", 6.0),
-    ("IELTS Writing ≥ 5.5", "ielts_writing", 5.5),
-]
+الموديول يحمّل قواعد القبول من ملف JSON ويقيّم أهلية المتقدم للبرنامج
+المطلوب. في حال عدم استيفاء الشروط، يتم إرجاع قائمة بالمعايير الناقصة
+والبرامج البديلة المقترحة.
+"""
+
+from __future__ import annotations
+
+from pathlib import Path
+from typing import Dict, List, Any
+import json
 
 
-def evaluate_eligibility(scores: Dict[str, float]) -> Dict[str, object]:
-    """Return eligibility status and missing criteria.
+# Path to JSON rules located alongside this module
+RULES_PATH = Path(__file__).with_name("program_rules.json")
 
-    Parameters:
-        scores: mapping of score name to value
-        Dictionary example: {
-            "high_school_score": 90,
-            "qudrat_score": 70,
-            "tahseely_score": 70,
-            "ielts_overall": 6.5,
-            "ielts_writing": 6.0,
-        }
 
-    Returns:
-        dict ready for JSON serialization
+# Human‑readable labels for criteria
+LABELS = {
+    "high_school": "High School % ≥ {value}",
+    "qudrat": "Qudurat Score ≥ {value}",
+    "tahseely": "Tahseely Score ≥ {value}",
+    "ielts": "IELTS ≥ {value}",
+}
+
+
+def evaluate_eligibility(applicant: Dict[str, float] | str) -> Dict[str, Any]:
+    """Return eligibility status, missing criteria and alternatives.
+
+    Parameters
+    ----------
+    applicant:
+        Either a mapping of applicant data or a JSON string containing:
+        ``program`` (requested program name) and the scores ``high_school``,
+        ``qudrat``, ``tahseely`` and ``ielts``.
+
+    Returns
+    -------
+    dict
+        JSON‑serialisable result with keys ``Status``, ``MissingCriteria`` and
+        ``SuggestedPrograms``.
     """
-    # Collect unmet rules
-    # جمع الشروط غير المستوفاة
-    missing: List[str] = []
-    for label, key, minimum in CRITERIA:
-        # Retrieve student's score; default to 0 if missing
-        # جلب درجة الطالب؛ القيمة الافتراضية 0 في حال عدم توفرها
-        value = scores.get(key, 0)
-        if value < minimum:
-            missing.append(label)
 
-    # Determine final status based on missing criteria
-    # تحديد الحالة النهائية بناءً على الشروط الناقصة
+    # Allow passing JSON string
+    if isinstance(applicant, str):
+        applicant = json.loads(applicant)
+
+    program = applicant.get("program")
+    if not program:
+        raise ValueError("Applicant data must include 'program'")
+
+    with RULES_PATH.open(encoding="utf-8") as f:
+        rules: Dict[str, Dict[str, float]] = json.load(f)
+
+    if program not in rules:
+        raise ValueError(f"Unknown program: {program}")
+
+    program_rules = rules[program]
+
+    missing: List[str] = []
+    for key, minimum in program_rules.items():
+        value = float(applicant.get(key, 0))
+        if value < minimum:
+            label_tpl = LABELS.get(key, f"{key} ≥ {{value}}")
+            missing.append(label_tpl.format(value=minimum))
+
     status = "Qualified" if not missing else "Not Qualified"
 
-    # Return JSON-ready result
-    # إرجاع النتيجة بصيغة جاهزة لـ JSON
-    return {"Status": status, "MissingCriteria": missing}
+    suggestions: List[str] = []
+    if status == "Not Qualified":
+        for alt_program, criteria in rules.items():
+            if alt_program == program:
+                continue
+            if all(float(applicant.get(k, 0)) >= v for k, v in criteria.items()):
+                suggestions.append(alt_program)
+
+    return {
+        "Status": status,
+        "MissingCriteria": missing,
+        "SuggestedPrograms": suggestions,
+    }
+
+
+__all__ = ["evaluate_eligibility"]
+
