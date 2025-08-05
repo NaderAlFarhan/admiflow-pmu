@@ -1,1 +1,163 @@
-// Placeholder content for frontend/index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AdmiFlow – PMU Smart Admissions</title>
+  <!-- Bootstrap 5 CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+  <div class="container my-5">
+    <h1 class="text-center mb-4">AdmiFlow – PMU Smart Admissions</h1>
+    <div class="row">
+      <!-- Eligibility Evaluation Engine -->
+      <div class="col-lg-6">
+        <div class="card mb-4">
+          <div class="card-header">Eligibility Evaluation Engine</div>
+          <div class="card-body">
+            <form id="eligibility-form">
+              <div class="mb-3">
+                <label for="highSchool" class="form-label">High School %</label>
+                <input type="number" class="form-control" id="highSchool" min="0" max="100" required>
+              </div>
+              <div class="mb-3">
+                <label for="aptitude" class="form-label">Aptitude Test Score</label>
+                <input type="number" class="form-control" id="aptitude" min="0" max="100" required>
+              </div>
+              <div class="mb-3">
+                <label for="achievement" class="form-label">Achievement Test Score</label>
+                <input type="number" class="form-control" id="achievement" min="0" max="100" required>
+              </div>
+              <div class="mb-3">
+                <label for="ielts" class="form-label">IELTS Overall Score</label>
+                <input type="number" step="0.5" class="form-control" id="ielts" min="0" max="9" required>
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Evaluate</button>
+            </form>
+            <div id="eligibility-result" class="mt-3 fw-bold"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bilingual Email Generator -->
+      <div class="col-lg-6">
+        <div class="card mb-4">
+          <div class="card-header">Bilingual Email Generator</div>
+          <div class="card-body">
+            <textarea id="email-content" class="form-control" rows="8">Dear Applicant,
+
+Thank you for applying to Prince Mohammad Bin Fahd University. Your application has been received.
+
+Regards,
+Admissions Office
+
+---
+
+عزيزي المتقدم،
+
+شكراً لتقديمك إلى جامعة الأمير محمد بن فهد. لقد تم استلام طلبك.
+
+مع التحية،
+قسم القبول</textarea>
+            <button class="btn btn-secondary mt-2" id="copy-email">Copy Email</button>
+            <div id="copy-msg" class="small text-success mt-2" style="display:none;">Copied to clipboard!</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Application Viewer -->
+      <div class="col-lg-6">
+        <div class="card mb-4">
+          <div class="card-header">Application Viewer</div>
+          <div class="card-body">
+            <div class="list-group">
+              <div class="list-group-item">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1">Ahmad Al-Saud</h5>
+                  <small class="text-success">Qualified</small>
+                </div>
+                <p class="mb-1">Computer Engineering</p>
+              </div>
+              <div class="list-group-item">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1">Fatimah Al-Otaibi</h5>
+                  <small class="text-warning">Under Review</small>
+                </div>
+                <p class="mb-1">Business Administration</p>
+              </div>
+              <div class="list-group-item">
+                <div class="d-flex w-100 justify-content-between">
+                  <h5 class="mb-1">Khalid Al-Harbi</h5>
+                  <small class="text-danger">Missing Docs</small>
+                </div>
+                <p class="mb-1">Electrical Engineering</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Staff Login -->
+      <div class="col-lg-6">
+        <div class="card mb-4">
+          <div class="card-header">Staff Login</div>
+          <div class="card-body">
+            <form>
+              <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" id="username" class="form-control" placeholder="Enter username">
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" id="password" class="form-control" placeholder="Enter password">
+              </div>
+              <button type="button" class="btn btn-primary w-100">Login</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script>
+    // Eligibility evaluation logic
+    document.getElementById('eligibility-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const hs = parseFloat(document.getElementById('highSchool').value);
+      const apt = parseFloat(document.getElementById('aptitude').value);
+      const ach = parseFloat(document.getElementById('achievement').value);
+      const ielts = parseFloat(document.getElementById('ielts').value);
+      let result = 'Not Eligible';
+      if (hs >= 85 && apt >= 65 && ach >= 65 && ielts >= 6.0) {
+        result = 'Eligible for Engineering';
+      } else if (hs >= 80 && apt >= 60 && ach >= 60 && ielts >= 6.0) {
+        result = 'Eligible for Non-Engineering';
+      }
+      const resEl = document.getElementById('eligibility-result');
+      resEl.textContent = result;
+      resEl.classList.remove('text-success', 'text-danger', 'text-primary');
+      if (result === 'Not Eligible') {
+        resEl.classList.add('text-danger');
+      } else if (result.includes('Non-Engineering')) {
+        resEl.classList.add('text-primary');
+      } else {
+        resEl.classList.add('text-success');
+      }
+    });
+
+    // Copy email content to clipboard
+    document.getElementById('copy-email').addEventListener('click', function() {
+      const content = document.getElementById('email-content');
+      navigator.clipboard.writeText(content.value).then(function() {
+        const msg = document.getElementById('copy-msg');
+        msg.style.display = 'block';
+        setTimeout(() => msg.style.display = 'none', 2000);
+      });
+    });
+  </script>
+</body>
+</html>
