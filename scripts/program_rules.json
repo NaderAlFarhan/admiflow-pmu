@@ -1,0 +1,14 @@
+{
+  "Engineering": {
+    "high_school": 85,
+    "qudrat": 65,
+    "tahseely": 65,
+    "ielts": 6.0
+  },
+  "Business": {
+    "high_school": 80,
+    "qudrat": 60,
+    "tahseely": 60,
+    "ielts": 6.0
+  }
+}
