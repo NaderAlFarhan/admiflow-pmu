@@ -67,3 +67,7 @@ router.get('/admin/applications', (req, res) => {
 });
 
 module.exports = router;
+
+// 🛠️ إتاحة البيانات المشتركة لمسارات المسؤول
+module.exports.applications = applications;
+module.exports.documents = documents;
