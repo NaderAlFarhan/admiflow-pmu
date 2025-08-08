@@ -1,0 +1,114 @@
+openapi: 3.0.0
+info:
+  title: AdmiFlow Evaluator API
+  version: 1.0.0
+paths:
+  /evaluate:
+    post:
+      summary: Evaluate a single applicant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Applicant'
+      responses:
+        '200':
+          description: Evaluation result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EvaluationResult'
+  /batch-evaluate:
+    post:
+      summary: Evaluate multiple applicants
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                applicants:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Applicant'
+      responses:
+        '200':
+          description: Batch evaluation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EvaluationResult'
+  /health:
+    get:
+      summary: Health check
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+components:
+  schemas:
+    Applicant:
+      type: object
+      required:
+        - national_id
+        - full_name
+        - program_type
+        - hs_percent
+        - qiyas_qt
+        - qiyas_sa
+        - ielts_overall
+        - ielts_writing
+      properties:
+        national_id:
+          type: string
+        full_name:
+          type: string
+        program_type:
+          type: string
+          enum: [Engineering, NonEngineering]
+        hs_percent:
+          type: number
+        qiyas_qt:
+          type: number
+        qiyas_sa:
+          type: number
+        ielts_overall:
+          type: number
+        ielts_writing:
+          type: number
+        documents:
+          type: array
+          items:
+            type: string
+    EvaluationResult:
+      type: object
+      properties:
+        eligible:
+          type: boolean
+        score:
+          type: number
+        missing_documents:
+          type: array
+          items:
+            type: string
+        recommended_programs:
+          type: array
+          items:
+            type: string
+        notes:
+          type: array
+          items:
+            type: string
