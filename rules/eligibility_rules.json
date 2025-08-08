@@ -1,0 +1,25 @@
+{
+  "documents_required": [
+    "National ID",
+    "Official High School Certificate (PDF)",
+    "Qiyas QT Report (PDF)",
+    "Qiyas SAAT Report (PDF)",
+    "English Test (IELTS/TOEFL)"
+  ],
+  "criteria": {
+    "Engineering": {
+      "hs_percent_min": 85,
+      "qiyas_qt_min": 65,
+      "qiyas_sa_min": 65,
+      "ielts_overall_min": 6.0,
+      "ielts_writing_min": 5.5
+    },
+    "NonEngineering": {
+      "hs_percent_min": 80,
+      "qiyas_qt_min": 60,
+      "qiyas_sa_min": 60,
+      "ielts_overall_min": 6.0,
+      "ielts_writing_min": 5.5
+    }
+  }
+}

@@ -2,9 +2,10 @@
   "name": "admiflow-pmu",
   "version": "1.0.0",
   "description": "AdmiFlow PMU – منصة القبول الذكية",
-  "main": "server.js",
+  "main": "src/server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node src/server.js",
+    "test": "node --test"
   },
   "dependencies": {
     "express": "^4.18.2",

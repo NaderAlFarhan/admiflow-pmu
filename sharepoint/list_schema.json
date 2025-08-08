@@ -1,0 +1,22 @@
+{
+  "lists": [
+    {
+      "title": "Applicants",
+      "fields": [
+        {"DisplayName": "FullName", "InternalName": "FullName", "Type": "Text", "Required": true},
+        {"DisplayName": "ProgramType", "InternalName": "ProgramType", "Type": "Choice", "Choices": ["Engineering", "NonEngineering"]},
+        {"DisplayName": "NationalID", "InternalName": "NationalID", "Type": "Text", "Required": true},
+        {"DisplayName": "Status", "InternalName": "Status", "Type": "Text"}
+      ]
+    },
+    {
+      "title": "AuditLog",
+      "fields": [
+        {"DisplayName": "Timestamp", "InternalName": "Timestamp", "Type": "DateTime"},
+        {"DisplayName": "Actor", "InternalName": "Actor", "Type": "Text"},
+        {"DisplayName": "Action", "InternalName": "Action", "Type": "Text"},
+        {"DisplayName": "ApplicantNationalID", "InternalName": "ApplicantNationalID", "Type": "Text"}
+      ]
+    }
+  ]
+}

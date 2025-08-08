@@ -70,3 +70,27 @@ Administrative Assistant – Admissions Unit
 
 [MIT License](LICENSE) – for educational and internal institutional use only.
 
+
+## 🛠 Node API
+
+### Run
+```bash
+npm install
+npm start
+```
+
+### Test
+```bash
+npm test
+```
+
+### Deploy (Docker)
+```bash
+docker build -t admiflow-api .
+docker run -p 3000:3000 admiflow-api
+```
+
+### Tenant Binding
+- Provision SharePoint lists using `scripts/provision-sharepoint.ps1`.
+- Import `flows/admissions_flow_skeleton.json` and bind SharePoint/Outlook connections.
+- Use email templates in the `emails/` directory for notifications.
